@@ -17,7 +17,12 @@
 - [학습 확인](./docs/learning-check.md)
 - [제출/Evidence 인덱스](./SUBMISSION.md)
 - [팀 결과물 안내](./team/README.md)
+- [소스/예시 작업공간](./src/README.md)
+- [Pre-runtime Handoff](./HANDOFF.md)
+- [Mission Result](./mission-result.yaml)
 
 ## 현재 상태
 
-정적 협업 하네스는 Workcell에서 준비하지만, B2-2의 PASS는 실제 3~5인 팀의 collaborator 권한, `main` Branch Protection, 팀원별 PR/Review, 리뷰 반영, 실제 충돌·트러블슈팅, Git graph Evidence가 확인된 뒤에만 가능합니다.
+정적 협업 하네스의 G1~G4는 완료되었습니다. B2-2의 전체 PASS는 실제 3~5인 팀의 collaborator 권한, `main` Branch Protection, 팀원별 PR/Review, 리뷰 반영, 실제 충돌·트러블슈팅, 팀원별 결과물 커밋, Git graph Evidence가 확인된 뒤에만 가능합니다.
+
+현재 Workcell 판정은 `NEEDS-RUNTIME`이며, `BLOCKER=3`, `MAJOR=0`입니다. Draft PR #3는 Human Runtime 완료 전에는 Mission 완료로 병합하지 않습니다.
