@@ -14,6 +14,7 @@
 - [협업 가이드](./docs/CONTRIBUTING.md)
 - [충돌 해결 로그](./docs/conflict-resolution.md)
 - [Git 트러블슈팅 로그](./docs/troubleshooting-log.md)
+- [학습 확인](./docs/learning-check.md)
 - [제출/Evidence 인덱스](./SUBMISSION.md)
 - [팀 결과물 안내](./team/README.md)
 
