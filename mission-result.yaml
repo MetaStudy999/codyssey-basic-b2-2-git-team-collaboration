@@ -1,0 +1,129 @@
+schema_version: 1
+mission:
+  id: "B2-2"
+  title: "친구 3~5명과 함께 프로그램 만드는 법 연습하기"
+
+control_tower:
+  repository: "MetaStudy999/codyssey-basic"
+  baseline_sha: "0d1581b3e82366988f57e1d76da311c028b8e15e"
+  drift: "NONE"
+  notes:
+    - "Active Wave repository/packet/baseline mapping matched."
+    - "Starter packet contains a non-impacting Mission-index filename inconsistency; the actual frozen index was used."
+    - "Control Tower was not modified by this Workcell."
+
+mission_repository:
+  repository: "MetaStudy999/codyssey-basic-b2-2-git-team-collaboration"
+  baseline_sha: "845ea2e47bc2b49864893db8ed3dd34208c0ef44"
+  final_commit_sha: null
+  reviewed_scaffold_commit_sha: "e4afde0acef3c12bfdcf8fec2b6b78f1c595913a"
+  pull_request: "https://github.com/MetaStudy999/codyssey-basic-b2-2-git-team-collaboration/pull/3"
+  merge_status: "OPEN"
+  pull_request_state: "DRAFT"
+
+source:
+  mode: "FULL_SOURCE"
+  confidence: "MEDIUM"
+  mission_source:
+    state: "VALID"
+    location: "b2-2-mission.md"
+  evaluation_source:
+    state: "VALID"
+    location: "b2-2-evaluation.md"
+  additional_sources:
+    - state: "UNREADABLE"
+      location: "b2-2-mission.pdf"
+      note: "File exists, but current PDF viewer could not render it for independent visual parity verification."
+  gaps:
+    - "Original Mission PDF visual/content parity with the Markdown transcription is not independently verified in the current tool environment."
+
+execution:
+  status: "NEEDS-RUNTIME"
+  learning: "NOT-STUDIED"
+  current_gate: "G5_RUNTIME"
+  verdict: "NEEDS-RUNTIME"
+
+gates:
+  G1_SOURCE: "PASS"
+  G2_BUILD: "PASS"
+  G3_TEST: "PASS"
+  G4_REVIEW: "PASS"
+  G5_RUNTIME: "NEEDS-RUNTIME"
+  G6_EVIDENCE: "NEEDS-RUNTIME"
+  G7_LEARN: "NEEDS-RUNTIME"
+  G8_MERGE: "BLOCKED"
+
+requirements:
+  confirmed: 16
+  passed: 2
+  partial: 6
+  failed: 1
+  unverified: 7
+  notes:
+    - "Static policies/templates/scaffolds are not counted as real team activity."
+    - "REQ-002 is failed/blocked because main currently reports protected=false."
+
+validation:
+  tests: "PASS"
+  commands:
+    - "GitHub repository tree check for required files/templates"
+    - "GitHub collaborator inventory"
+    - "GitHub branch/protection-state inventory"
+    - "GitHub PR/Issue/review inventory"
+    - "PR #3 diff Self Review"
+    - "Independent fresh criteria mapping against b2-2-evaluation.md"
+  blocker: 3
+  major: 0
+  minor: 0
+  self_review_count: 1
+  independent_review_count: 1
+
+runtime:
+  required: true
+  owner: "HUMAN"
+  result: "NEEDS_RUNTIME"
+  notes: "Real 3–5 person participation, GitHub admin Branch Protection, member PR/review/feedback activity, conflicts, troubleshooting, team contributions, Git graph, and final evidence are required."
+
+evidence:
+  complete: false
+  locations:
+    - "MISSION-WORK-PACKET.md"
+    - "SUBMISSION.md"
+    - "docs/CONTRIBUTING.md"
+    - "docs/conflict-resolution.md"
+    - "docs/troubleshooting-log.md"
+    - "docs/learning-check.md"
+    - "HANDOFF.md"
+    - "https://github.com/MetaStudy999/codyssey-basic-b2-2-git-team-collaboration/issues/2"
+    - "https://github.com/MetaStudy999/codyssey-basic-b2-2-git-team-collaboration/pull/3"
+  missing:
+    - "2–4 additional real collaborators and accepted collaboration access"
+    - "main Branch Protection/ruleset requiring PR and at least one approval"
+    - "Every member: at least 2 merged PRs"
+    - "Every member: at least 2 reviews on other members' PRs"
+    - "Every member: at least 1 own-PR feedback application/reply"
+    - "At least 2 real conflict resolutions including 1 non-trivial conflict"
+    - "Real amend/reset/revert/stash execution logs with every member participating in at least one scenario"
+    - "Real team/<github-id>.md member contribution commits"
+    - "Populated SUBMISSION.md with real URLs/SHAs"
+    - "Final git log --oneline --graph --decorate --all evidence"
+
+dependency:
+  state: "NONE"
+  related_missions: []
+
+risks:
+  - "Mission PDF parity remains a contained Source Gap until the PDF can be visually checked."
+  - "Merging the preparatory draft PR before Human Runtime could be misread as Mission completion; keep G8 blocked until evidence is complete."
+
+backlog:
+  - "Optional bonus only after required completion: private-branch interactive rebase history exercise."
+  - "Optional bonus only after required completion: CODEOWNERS."
+
+representative_integration:
+  required: true
+  status: "BLOCKED"
+  requested_updates:
+    - "config/missions.yaml"
+  generated_outputs_direct_edit: false
+  note: "Do not integrate B2-2 progress into the Control Tower until Human Runtime is complete and the Mission repository has a truthful final merge/PASS handoff."
