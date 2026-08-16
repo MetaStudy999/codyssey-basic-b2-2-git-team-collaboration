@@ -17,19 +17,23 @@ B2-1을 먼저 수행하면 개인 단위 Python/Git 작업 흐름을 익힌 뒤
 
 ## 시작 순서
 
-1. `REFERENCE-STATUS.md`
-2. `REFERENCE-BUILD.md`
-3. `reference/team-repo/`
-4. `docs/github-runtime-audit.md`
-5. `BEGINNER-GUIDE.md`
-6. `CHECKLIST.md`
+1. `START-CHECK.md` — Git/GitHub 기본 흐름 자가진단
+2. `REFERENCE-STATUS.md`
+3. `REFERENCE-BUILD.md`
+4. `reference/team-repo/`
+5. `docs/github-runtime-audit.md`
+6. `BEGINNER-GUIDE.md`
+7. `CHECKLIST.md`
+
+`START-CHECK.md`는 공식 Gate가 아니라 부족한 Git/협업 개념을 미리 찾기 위한 안내입니다.
 
 ## 핵심 원칙
 
 B2-2는 Reference 문서의 존재보다 **실제 팀의 Issue/PR/Review/Conflict/Troubleshooting 기록**이 중요합니다.
 
 ```text
-Reference Team Skeleton
+시작 전 지식 체크
+→ Reference Team Skeleton
 → 실제 3~5인 팀
 → Issue / feature / PR / Review
 → conflict / troubleshooting
