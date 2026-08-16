@@ -7,6 +7,14 @@
 - 실제 팀 GitHub Runtime/Evidence: **미실행**
 - CLEAR: **아님**
 
+## 선행 학습
+
+- **필수 선행 미션:** 없음
+- **권장 선행 미션:** B2-1
+- **있으면 좋은 선행 지식:** Git `add/commit/branch/merge/remote`, GitHub Issue/PR 기초
+
+B2-1을 먼저 수행하면 개인 단위 Python/Git 작업 흐름을 익힌 뒤 팀 협업으로 확장하기 쉬워집니다. 그러나 Git/GitHub 기본 사용 경험이 이미 있다면 B2-1을 CLEAR하지 않고도 B2-2를 시작할 수 있습니다.
+
 ## 시작 순서
 
 1. `REFERENCE-STATUS.md`
