@@ -30,20 +30,46 @@ B2-2는 코드 완성보다 **3~5인 팀의 실제 GitHub 협업 기록**이 핵
 14. Evaluation Q&A
 15. Runtime Audit 후 CLEAR
 
-## Reference Build 준비 대상
+## Reference Build 준비 결과
 
-- Team repo skeleton
-- PR template
-- Issue template
-- CONTRIBUTING 기준본
-- Conflict 기록 템플릿 + 2회 실습 설계
-- Troubleshooting 4종 실습 템플릿
-- SUBMISSION 인덱스
-- Requirement/Evidence Mapping
-- Evaluation Q&A
-- local/runtime verification checklist
-- Beginner Guide
+- [x] Team repo skeleton
+- [x] PR template
+- [x] Issue template
+- [x] CONTRIBUTING 기준본
+- [x] Conflict 기록 템플릿 + 2회 실습 설계
+- [x] 비자명 conflict same-hunk / rename-modify 설계
+- [x] Troubleshooting amend/reset/revert/stash 4종 안전 절차
+- [x] SUBMISSION 인덱스
+- [x] simple deliverable 팀원별 기여 가이드
+- [x] Requirement/Evidence Mapping
+- [x] Evaluation Q&A
+- [x] Evidence Guide
+- [x] environment/local verify helper
+- [x] Beginner Guide Step 01~10
+- [x] CHECKLIST Reference/Runtime 분리
+- [x] 실제 PR/Review/Conflict를 가짜 PASS로 기록하지 않음
 
-## 상태
+## Phase C에서만 완료할 것
 
-**Reference Build 진행 중 / Mission 상태 ⬜ NOT STARTED / 실제 팀 협업 미시작**
+- [ ] 실제 3~5인 팀/권한
+- [ ] 실제 Branch Protection
+- [ ] 실제 Issue/feature/PR/Review/Merge
+- [ ] 팀원별 merged PR 2+
+- [ ] 팀원별 타인 Review 2+
+- [ ] 팀원별 본인 PR feedback 반영 1+
+- [ ] conflict 2+ / non-trivial 1+
+- [ ] troubleshooting 4종 + 팀원별 1개 참여
+- [ ] simple deliverable 팀원별 commit 1+
+- [ ] 실제 SUBMISSION links
+- [ ] git graph Evidence
+- [ ] GitHub 서버 기록 Audit
+- [ ] Evaluation 자기 말 설명
+- [ ] `✅ B2-2 CLEAR`
+
+## 현재 판정
+
+**Reference Build: 기준본 준비 완료**
+
+**Mission 상태: ⬜ NOT STARTED 유지 / 실제 팀 Runtime 미시작 / CLEAR 아님**
+
+다음 Phase A 작업은 B3-1 Reference Build입니다.
