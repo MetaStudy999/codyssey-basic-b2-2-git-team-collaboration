@@ -1,0 +1,3 @@
+# B2-2 — Ubuntu 24.04 mission-specific APT packages
+# No additional APT packages beyond the Control Tower Base.
+# Git is supplied by the Base layer; GitHub Issue/PR/Review evidence is server-side.
