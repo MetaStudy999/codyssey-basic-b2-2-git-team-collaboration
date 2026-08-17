@@ -1,3 +1,4 @@
 # B2-2 — Ubuntu 24.04 mission-specific APT packages
-# No additional APT packages beyond the Control Tower Base.
-# Git is supplied by the Base layer; GitHub Issue/PR/Review evidence is server-side.
+# No additional APT packages beyond the Control Tower shared developer layers.
+# Git/openssh-client are Common Base; gh is the common GitHub CLI installed from GitHub's official APT repository.
+# GitHub Issue/PR/Review/Branch Protection evidence remains server-side.
