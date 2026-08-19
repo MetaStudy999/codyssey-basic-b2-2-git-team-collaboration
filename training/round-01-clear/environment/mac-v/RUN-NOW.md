@@ -2,7 +2,7 @@
 
 > **TRAINING SIMULATION — NOT OFFICIAL B2-2 EVIDENCE**
 
-이 문서는 여러 번 멈추지 않고 MAC-V CORE 환경을 **단계 묶음**으로 준비하기 위한 실행 진입점입니다.
+이 문서는 여러 번 멈추지 않고 MAC-V CORE 환경을 **단계 묶음**으로 준비하고, Identity Gate 이후 협업 Simulation까지 연결하기 위한 실행 진입점입니다.
 
 ```text
 학교 공용 Mac
@@ -12,10 +12,11 @@
 → codyssey01~05
 → GitHub A~E
 → Identity Gate 5/5
-→ Simulation
+→ Simulation Repository clone 5/5
+→ Issue/PR/Review Simulation
 ```
 
-실제 명령 출력이 없으면 PASS로 기록하지 않습니다.
+실제 명령 출력과 GitHub 기록이 없으면 PASS로 기록하지 않습니다.
 
 ## 1. macOS Host — OrbStack / codyssey 준비
 
@@ -182,26 +183,58 @@ codyssey05 ↔ GitHub E ↔ Git Identity E
 
 하나라도 불일치하면 Issue/Commit/PR/Review Simulation을 시작하지 않습니다.
 
-## 5. 다음 Gate
+## 5. Simulation Repository 확정 / clone 5개
 
-Identity Gate 5/5 이후에만:
+Simulation은 **별도 학습용 Repository**를 사용합니다.
 
 ```text
-Simulation Repository 확정
-→ 사용자별 독립 clone 5개
-→ Issue
-→ Branch
-→ Commit / Push
-→ PR
-→ Review
-→ Feedback
-→ Merge
-→ Conflict
-→ Troubleshooting
-→ Simulation Evidence
+Reference Repository 재사용 금지(기본)
+실제 팀 Repository 재사용 금지(기본)
+Simulation 전용 Repository 사용
 ```
 
-으로 이동합니다.
+Repository가 확정되고 Account A~E 모두 접근 가능해진 뒤 Ubuntu 관리자 세션에서:
+
+```bash
+cd "$HOME/codyssey/codyssey-basic-b2-2-git-team-collaboration"
+
+sudo bash training/round-01-clear/environment/mac-v/prepare-simulation-clones.sh \
+  <OWNER>/<SIMULATION-REPO>
+```
+
+각 사용자에 다음 clone이 만들어집니다.
+
+```text
+/home/codyssey01/b2-2-team/simulation
+/home/codyssey02/b2-2-team/simulation
+/home/codyssey03/b2-2-team/simulation
+/home/codyssey04/b2-2-team/simulation
+/home/codyssey05/b2-2-team/simulation
+```
+
+스크립트는 기존 clone을 자동 삭제하지 않고, local changes가 있으면 STOP하며 `git pull --ff-only`만 허용합니다.
+
+## 6. Issue / PR / Review Simulation
+
+clone 5/5 이후 다음 Runbook으로 이동합니다.
+
+- [`../../simulation/mac-v/README.md`](../../simulation/mac-v/README.md)
+- [`../../simulation/mac-v/TASK-MATRIX.md`](../../simulation/mac-v/TASK-MATRIX.md)
+- [`../../simulation/mac-v/CONFLICT-AND-TROUBLESHOOTING-LAB.md`](../../simulation/mac-v/CONFLICT-AND-TROUBLESHOOTING-LAB.md)
+
+훈련 목표:
+
+```text
+Issue                 10+
+Merged PR             10+ / 계정별 2+
+Substantive Review    10+ / 계정별 2+
+Feedback application  5+ / 계정별 1+
+Conflict              2+ / non-trivial 1+
+Troubleshooting       4종
+Participation         5/5
+```
+
+## 7. Evidence
 
 Simulation Evidence 위치:
 
@@ -213,7 +246,13 @@ Simulation Evidence 위치:
 
 두 Evidence를 혼합하지 않습니다.
 
-## 6. 공용 PC Closeout
+Simulation Repository의 `SUBMISSION.md` 상단에도 다음을 표시합니다.
+
+```text
+TRAINING SIMULATION — NOT OFFICIAL B2-2 EVIDENCE
+```
+
+## 8. 공용 PC Closeout
 
 학습 종료 시:
 
@@ -228,9 +267,13 @@ Simulation Evidence 위치:
 현재 Repository 반영 상태:
 
 ```text
-Runbook / Automation     ✅ READY
-MAC-V 실제 Runtime       ⬜ NOT RUN
-Identity Gate            ⬜ NOT RUN
-Simulation               ⬜ NOT RUN
-Actual Mission CLEAR     ❌ 아님
+Host/CORE Runbook            ✅ READY
+Identity 5/5 verifier        ✅ READY
+Simulation clone helper      ✅ READY
+Task / Review Matrix         ✅ READY
+Conflict/Troubleshooting Lab ✅ READY
+MAC-V 실제 Runtime           ⬜ NOT RUN
+Identity Gate 실제 PASS      ⬜ NOT RUN
+Simulation 실제 수행         ⬜ NOT RUN
+Actual Mission CLEAR         ❌ 아님
 ```
