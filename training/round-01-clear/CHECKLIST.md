@@ -8,6 +8,9 @@
 - Mission: **B2-2**
 - Runtime Mission 상태: **⬜ NOT STARTED**
 - Phase A Reference 상태: **CORE READY**
+- 5계정 Simulation 문서 상태: **✅ DOCUMENTATION READY**
+- MAC-V Simulation Runtime: **⬜ NOT RUN**
+- WIN-V Simulation Runtime: **⬜ NOT RUN**
 
 ## A. Source / Reference
 
@@ -147,3 +150,54 @@
 - [ ] Secret/Token 노출 없음
 - [ ] 공식 Mission/Evaluation 누락 없음
 - [ ] **✅ B2-2 CLEAR**
+
+## K. 5계정 학습 Simulation — 공식 Evidence와 분리
+
+> 이 섹션은 학습용입니다. 체크되어도 실제 팀 B2-2 Evidence를 대신하지 않습니다.
+
+### 공통 설계
+
+- [x] 동일 GitHub 학습 계정 5개를 MAC-V/WIN-V에서 공통 사용하도록 설계
+- [x] `codyssey01`~`codyssey05` ↔ GitHub Account A~E 1:1 매핑
+- [x] `gh` + HTTPS 기본 인증 정책
+- [x] `OS User ↔ GitHub Login ↔ Git Commit Identity` Gate 정의
+- [x] `environment/MULTI-ACCOUNT-SIMULATION.md` 작성
+
+### MAC-V Documentation / Automation
+
+- [x] 학교 공용 Mac의 macOS 사용자 계정 1개 유지 정책
+- [x] OrbStack Ubuntu 24.04 machine 이름 `codyssey` 고정
+- [x] Ubuntu 내부 Linux User `codyssey01`~`codyssey05` 설계
+- [x] `environment/mac-v/README.md` 단계별 실행 가이드
+- [x] `environment/mac-v/setup-base.sh` 준비
+- [x] `environment/mac-v/setup-users.sh` 준비
+- [x] `environment/mac-v/verify.sh` 준비
+- [x] `environment/mac-v/CLOSEOUT.md` 공용 PC 보안 마무리 절차
+
+### MAC-V Runtime — 실제 Mac 실행 후에만
+
+- [ ] `orb status` PASS
+- [ ] OrbStack `codyssey` 존재/생성
+- [ ] `codyssey` = Ubuntu 24.04
+- [ ] Git/gh 공통 도구 PASS
+- [ ] `codyssey01`~`codyssey05` 5/5 존재
+- [ ] 사용자 HOME/Workspace 검증 0 FAIL
+- [ ] GitHub Account A~E gh 인증 5/5
+- [ ] Git identity 5/5
+- [ ] Account Identity Gate 5/5
+- [ ] 각 사용자별 Repository clone 5/5
+- [ ] MAC-V Simulation 협업 Runtime 수행
+- [ ] 공용 PC Closeout PASS
+
+### WIN-V Runtime
+
+- [ ] WSL2 Ubuntu 24.04 기준 확인
+- [ ] `codyssey01`~`codyssey05` 구성
+- [ ] 동일 GitHub Account A~E 인증/Identity Gate
+- [ ] WIN-V Simulation 협업 Runtime 수행
+
+### Cross-platform / Advanced
+
+- [ ] MAC-V ↔ WIN-V Cross-platform 협업
+- [ ] MAC-V 독립 OrbStack machine 5개 ADVANCED 실습
+- [ ] WIN-V 독립 WSL2 instance 또는 VM 5개 ADVANCED 실습
