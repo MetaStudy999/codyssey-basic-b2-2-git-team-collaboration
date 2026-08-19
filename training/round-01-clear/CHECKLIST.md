@@ -176,6 +176,7 @@
 - [x] Ubuntu 내부 Linux User `codyssey01`~`codyssey05` 설계
 - [x] `environment/mac-v/README.md` 단계별 실행 가이드
 - [x] `environment/mac-v/RUN-NOW.md` 묶음 실행 진입점
+- [x] `environment/mac-v/mac-v-orchestrate.sh` Host→Guest CORE one-command runner
 - [x] `environment/mac-v/host-preflight.sh` OrbStack 안전 점검/조건부 생성
 - [x] `environment/mac-v/setup-base.sh` Control Tower Bootstrap 위임
 - [x] `environment/mac-v/setup-users.sh` 준비
@@ -184,6 +185,7 @@
 - [x] `environment/mac-v/verify-identity.sh` 단일 계정 Gate
 - [x] `environment/mac-v/verify-all-identities.sh` 5계정 Gate
 - [x] `environment/mac-v/prepare-simulation-clones.sh` 독립 clone 5개 helper
+- [x] `environment/mac-v/MAC-V-EXECUTION-RECORD-TEMPLATE.md` 실제 실행 기록 템플릿
 - [x] `environment/mac-v/CLOSEOUT.md` 공용 PC 보안 마무리 절차
 - [x] `simulation/mac-v/README.md` 협업 Simulation Runbook
 - [x] `simulation/mac-v/TASK-MATRIX.md` 10 Issue/PR + Review Rotation 설계
@@ -193,6 +195,7 @@
 
 ### MAC-V Runtime — 실제 Mac 실행 후에만
 
+- [ ] `mac-v-orchestrate.sh --prepare` 또는 동등 수동 절차 실제 실행
 - [ ] `orb status` PASS
 - [ ] OrbStack `codyssey` 존재/생성
 - [ ] `codyssey` = Ubuntu 24.04
@@ -212,6 +215,7 @@
 - [ ] Conflict 2+ / non-trivial 1+
 - [ ] Troubleshooting 4종 / Account A~E 전원 참여
 - [ ] Simulation `SUBMISSION.md` 완성
+- [ ] `MAC-V-EXECUTION-RECORD` 실제 값으로 작성
 - [ ] MAC-V Simulation 협업 Runtime 수행
 - [ ] 공용 PC Closeout PASS
 
