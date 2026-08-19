@@ -167,6 +167,7 @@
 - [x] `gh` + HTTPS 기본 인증 정책
 - [x] `OS User ↔ GitHub Login ↔ Git Commit Identity` Gate 정의
 - [x] `environment/MULTI-ACCOUNT-SIMULATION.md` 작성
+- [x] `simulation/README.md` Simulation 전용 Hub
 
 ### MAC-V Documentation / Automation
 
@@ -174,10 +175,21 @@
 - [x] OrbStack Ubuntu 24.04 machine 이름 `codyssey` 고정
 - [x] Ubuntu 내부 Linux User `codyssey01`~`codyssey05` 설계
 - [x] `environment/mac-v/README.md` 단계별 실행 가이드
-- [x] `environment/mac-v/setup-base.sh` 준비
+- [x] `environment/mac-v/RUN-NOW.md` 묶음 실행 진입점
+- [x] `environment/mac-v/host-preflight.sh` OrbStack 안전 점검/조건부 생성
+- [x] `environment/mac-v/setup-base.sh` Control Tower Bootstrap 위임
 - [x] `environment/mac-v/setup-users.sh` 준비
+- [x] `environment/mac-v/prepare-core.sh` CORE 묶음 준비
 - [x] `environment/mac-v/verify.sh` 준비
+- [x] `environment/mac-v/verify-identity.sh` 단일 계정 Gate
+- [x] `environment/mac-v/verify-all-identities.sh` 5계정 Gate
+- [x] `environment/mac-v/prepare-simulation-clones.sh` 독립 clone 5개 helper
 - [x] `environment/mac-v/CLOSEOUT.md` 공용 PC 보안 마무리 절차
+- [x] `simulation/mac-v/README.md` 협업 Simulation Runbook
+- [x] `simulation/mac-v/TASK-MATRIX.md` 10 Issue/PR + Review Rotation 설계
+- [x] `simulation/mac-v/CONFLICT-AND-TROUBLESHOOTING-LAB.md`
+- [x] `simulation/mac-v/SUBMISSION-TEMPLATE.md`
+- [x] `simulation/mac-v/audit-github-counts.sh` read-only count audit
 
 ### MAC-V Runtime — 실제 Mac 실행 후에만
 
@@ -190,7 +202,16 @@
 - [ ] GitHub Account A~E gh 인증 5/5
 - [ ] Git identity 5/5
 - [ ] Account Identity Gate 5/5
-- [ ] 각 사용자별 Repository clone 5/5
+- [ ] Simulation Repository 확정
+- [ ] 각 사용자별 독립 Repository clone 5/5
+- [ ] Issue 10+
+- [ ] merged PR 10+ / 계정별 2+
+- [ ] substantive Review 10+ / 계정별 2+
+- [ ] Feedback application 5+ / 계정별 1+
+- [ ] simple deliverable contribution 5/5
+- [ ] Conflict 2+ / non-trivial 1+
+- [ ] Troubleshooting 4종 / Account A~E 전원 참여
+- [ ] Simulation `SUBMISSION.md` 완성
 - [ ] MAC-V Simulation 협업 Runtime 수행
 - [ ] 공용 PC Closeout PASS
 
