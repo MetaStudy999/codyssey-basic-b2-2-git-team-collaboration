@@ -15,17 +15,48 @@
 
 B2-1을 먼저 수행하면 개인 단위 Python/Git 작업 흐름을 익힌 뒤 팀 협업으로 확장하기 쉬워집니다. 그러나 Git/GitHub 기본 사용 경험이 이미 있다면 B2-1을 CLEAR하지 않고도 B2-2를 시작할 수 있습니다.
 
-## 시작 순서
+## 빠른 시작(Quick Start)
 
 1. `START-CHECK.md` — Git/GitHub 기본 흐름 자가진단
 2. `REFERENCE-STATUS.md`
 3. `REFERENCE-BUILD.md`
-4. `reference/team-repo/`
-5. `docs/github-runtime-audit.md`
-6. `BEGINNER-GUIDE.md`
-7. `CHECKLIST.md`
+4. `environment/MULTI-ACCOUNT-SIMULATION.md` — 5계정 MAC-V/WIN-V 학습 Simulation
+5. `reference/team-repo/`
+6. `docs/github-runtime-audit.md`
+7. `BEGINNER-GUIDE.md`
+8. `CHECKLIST.md`
 
 `START-CHECK.md`는 공식 Gate가 아니라 부족한 Git/협업 개념을 미리 찾기 위한 안내입니다.
+
+## 📑 목차
+
+- [현재 상태](#현재-상태)
+- [선행 학습](#선행-학습)
+- [빠른 시작](#빠른-시작quick-start)
+- [5계정 학습 Simulation](#5계정-학습-simulation)
+- [핵심 원칙](#핵심-원칙)
+
+## 5계정 학습 Simulation
+
+B2-2 학습용으로 GitHub 계정은 총 5개를 준비하고, 동일한 5개 계정을 MAC-V와 WIN-V에서 각각 사용합니다.
+
+기본 권장 경로:
+
+```text
+MAC-V: Runtime 1개 + Linux User codyssey01~05
+WIN-V: Runtime 1개 + Linux User codyssey01~05
+        ↓
+MAC-V ↔ WIN-V Cross-platform Simulation
+        ↓
+MAC-V: codyssey01~05 VM/Instance 5개 확장
+WIN-V: codyssey01~05 VM/Instance 5개 확장
+```
+
+GitHub 로그인은 `gh`(GitHub CLI)를 기본으로 사용하고, Linux User/VM별 GitHub Identity를 1:1로 고정합니다.
+
+상세 기준은 [`environment/MULTI-ACCOUNT-SIMULATION.md`](environment/MULTI-ACCOUNT-SIMULATION.md)를 사용합니다.
+
+> Simulation PASS/CLEAR는 실제 B2-2 Mission PASS/CLEAR가 아닙니다. 학습 Simulation 기록을 실제 팀 Evidence로 대체하지 않습니다.
 
 ## 핵심 원칙
 
