@@ -16,6 +16,8 @@ Usage:
 - git user.email 설정 여부
 
 Token/Password/Private Key 값은 출력하지 않습니다.
+GH_TOKEN/GITHUB_TOKEN 환경변수는 검증 시 명시적으로 제거하여
+각 Linux User의 저장된 gh 인증을 확인합니다.
 EOF
 }
 
@@ -40,7 +42,9 @@ for i in "${!USERS[@]}"; do
     continue
   fi
 
-  actual="$(sudo -H -u "$user" gh api user --jq '.login' 2>/dev/null || true)"
+  actual="$(sudo -H -u "$user" env -u GH_TOKEN -u GITHUB_TOKEN \
+    gh api user --jq '.login' 2>/dev/null || true)"
+
   if [[ -z "$actual" ]]; then
     fail "$user: GitHub 인증을 확인할 수 없습니다"
   elif [[ "$actual" != "$expected" ]]; then
@@ -63,7 +67,6 @@ for i in "${!USERS[@]}"; do
   else
     fail "$user: git user.email missing"
   fi
-
 done
 
 printf '\n===== Summary =====\n'
