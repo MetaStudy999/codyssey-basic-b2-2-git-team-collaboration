@@ -8,8 +8,10 @@
 
 ```text
 Identity Gate 5/5
-→ Simulation Repository 확정
+→ Simulation Repository seed 생성
+→ Account B~E collaborator 수락
 → main 보호 정책
+→ Repository Gate
 → clone 5개
 → 10 Issue
 → 10 PR
@@ -52,18 +54,39 @@ Identity Gate 5/5
 별도 학습용 GitHub Repository를 사용합니다.
 
 ```text
-권장 이름 예:
+기본 권장 이름:
 codyssey-b2-2-sim-mac-v
 ```
 
-Repository 이름은 예시이며 실제 생성 이름은 사용자가 정합니다.
-
-다음 저장소는 기본적으로 Simulation Repository로 사용하지 않습니다.
+다음 저장소는 Simulation Repository로 재사용하지 않습니다.
 
 - `MetaStudy999/codyssey-basic-b2-2-git-team-collaboration` — Reference/Training Repository
 - 실제 B2-2 3~5인 팀 Repository — 공식 Evidence 대상
 
-Simulation Repository가 확정되면 5개 GitHub Account 모두 Collaboration 가능한지 확인합니다.
+Repository 준비의 Source of Truth:
+
+- [`SIMULATION-REPOSITORY-SETUP.md`](SIMULATION-REPOSITORY-SETUP.md)
+- [`repository-template/`](repository-template/)
+
+Account A(`codyssey01`)에서 Identity Gate가 PASS한 뒤 다음 helper로 seed Repository를 만들 수 있습니다.
+
+```bash
+cd "$HOME/codyssey/codyssey-basic-b2-2-git-team-collaboration"
+
+bash training/round-01-clear/environment/mac-v/create-simulation-repo.sh
+```
+
+이 helper는 기존 remote/local path를 자동 덮어쓰지 않습니다.
+
+그 다음:
+
+```text
+Account B~E collaborator 추가
+→ B~E 각자 초대 수락
+→ main 보호 정책 적용
+→ verify-simulation-repo.sh 0 FAIL
+→ prepare-simulation-clones.sh clone 5/5
+```
 
 ### main 보호
 
@@ -77,27 +100,35 @@ force push 금지
 branch deletion 보호 정책 확인
 ```
 
-설정 화면/Ruleset 정책은 Repository 종류와 GitHub 요금제/조직 정책에 따라 표현이 달라질 수 있으므로 실제 UI/API 결과를 기준으로 확인합니다.
+설정 화면/Ruleset 정책은 실제 GitHub UI/API 결과를 기준으로 확인합니다.
 
 ## 3. Repository 초기 구조
 
-간단한 Python utility project를 권장합니다.
+`repository-template/`이 초기 seed를 제공합니다.
 
 ```text
 README.md
 SUBMISSION.md
 .github/
   pull_request_template.md
+  ISSUE_TEMPLATE/
+    task.md
 docs/
   CONTRIBUTING.md
   conflict-resolution.md
   troubleshooting-log.md
 src/
-  math_ops.py
-  string_ops.py
-  date_ops.py
-  list_ops.py
-  file_ops.py
+  README.md
+```
+
+다음 결과물 파일은 **초기 seed에서 미리 완성하지 않습니다.** Account A~E가 실제 Issue/branch/PR을 통해 추가합니다.
+
+```text
+src/math_ops.py
+src/string_ops.py
+src/date_ops.py
+src/list_ops.py
+src/file_ops.py
 ```
 
 목적은 복잡한 애플리케이션 개발이 아니라 **협업 흐름 자체를 반복 훈련**하는 것입니다.
@@ -193,7 +224,7 @@ Troubleshooting
 
 ## 8. Evidence / 제출 인덱스
 
-Simulation Repository 자체에도 `SUBMISSION.md`를 만들고 다음을 인덱싱합니다.
+Simulation Repository에는 초기부터 `SUBMISSION.md`를 두고 실제 학습 기록으로 채웁니다.
 
 ```text
 Repository URL
@@ -207,7 +238,7 @@ Troubleshooting 기록
 Git graph
 ```
 
-단, 파일 상단에 반드시 다음을 표시합니다.
+파일 상단의 다음 표시는 제거하지 않습니다.
 
 ```text
 TRAINING SIMULATION — NOT OFFICIAL B2-2 EVIDENCE
@@ -225,6 +256,7 @@ MAC-V Simulation을 PASS로 기록하려면 최소 다음을 확인합니다.
 
 ```text
 [ ] GitHub Account 5/5
+[ ] Simulation Repository Gate 0 FAIL
 [ ] 독립 clone 5/5
 [ ] Issue 10+
 [ ] merged PR 10+ / 계정별 2+
