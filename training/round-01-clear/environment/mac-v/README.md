@@ -33,7 +33,7 @@ MAC-V Documentation Ready
 - [2. 공용 PC 보안 원칙](#2-공용-pc-보안-원칙)
 - [3. Phase M0 — OrbStack 사전 점검](#3-phase-m0--orbstack-사전-점검)
 - [4. Phase M1 — Ubuntu 24.04 codyssey 준비](#4-phase-m1--ubuntu-2404-codyssey-준비)
-- [5. Phase M2 — 공통 도구 준비](#5-phase-m2--공통-도구-준비)
+- [5. Phase M2 — 공통 Ubuntu Bootstrap](#5-phase-m2--공통-ubuntu-bootstrap)
 - [6. Phase M3 — Linux 사용자 5개 생성](#6-phase-m3--linux-사용자-5개-생성)
 - [7. Phase M4 — GitHub 계정 5개 gh 인증](#7-phase-m4--github-계정-5개-gh-인증)
 - [8. Phase M5 — Account Identity Gate](#8-phase-m5--account-identity-gate)
@@ -142,8 +142,6 @@ orb -m codyssey cat /etc/os-release
 orb create ubuntu:noble codyssey
 ```
 
-OrbStack 공식 문서 기준 `ubuntu:noble`은 Ubuntu 24.04 LTS입니다.
-
 생성 후 확인:
 
 ```bash
@@ -158,9 +156,9 @@ ID=ubuntu
 VERSION_ID=24.04
 ```
 
-CPU architecture는 학교 Mac 하드웨어에 따라 `arm64/aarch64` 또는 `amd64/x86_64`일 수 있습니다. B2-2에서는 Ubuntu 24.04 사용자 공간과 Git/GitHub 절차 일치를 핵심 기준으로 사용합니다.
+CPU architecture는 학교 Mac 하드웨어에 따라 달라질 수 있으므로 Host CPU를 보고 추측하지 않고 **Ubuntu 내부 `uname -m` 실제 결과**를 사용합니다.
 
-## 5. Phase M2 — 공통 도구 준비
+## 5. Phase M2 — 공통 Ubuntu Bootstrap
 
 Ubuntu `codyssey`의 기본 사용자로 들어갑니다.
 
@@ -168,22 +166,36 @@ Ubuntu `codyssey`의 기본 사용자로 들어갑니다.
 orb -m codyssey
 ```
 
-이 저장소의 MAC-V 환경 도구는 다음 파일로 관리합니다.
+B2-2는 Git/`gh` 등 공통 개발도구를 자체 기준으로 중복 설치하지 않습니다. **Control Tower의 Ubuntu Developer Bootstrap이 단일 기준(Source of Truth)**입니다.
 
-```text
-environment/mac-v/setup-base.sh
-environment/mac-v/setup-users.sh
-environment/mac-v/verify.sh
-```
-
-Repository를 준비한 뒤:
+Control Tower가 이미 있다면:
 
 ```bash
-sudo bash training/round-01-clear/environment/mac-v/setup-base.sh
-sudo bash training/round-01-clear/environment/mac-v/setup-users.sh
+cd "$HOME/codyssey/codyssey-basic"
+bash environments/ubuntu/bootstrap.sh --check
 ```
 
-`setup-base.sh`는 **CHECK BEFORE INSTALL** 원칙으로 Git/GitHub CLI 등의 존재 여부를 먼저 확인하고 필요한 항목만 설치합니다.
+필수 항목이 실제로 누락된 경우에만:
+
+```bash
+bash environments/ubuntu/bootstrap.sh --install
+bash environments/ubuntu/bootstrap.sh --check
+```
+
+B2-2 Repository의 `setup-base.sh`는 위 Control Tower Bootstrap을 호출하는 편의 wrapper입니다.
+
+```bash
+bash training/round-01-clear/environment/mac-v/setup-base.sh
+```
+
+다른 위치에 Control Tower가 있으면:
+
+```bash
+CONTROL_TOWER="/path/to/codyssey-basic" \
+  bash training/round-01-clear/environment/mac-v/setup-base.sh
+```
+
+B2-2 전용 추가 APT package는 현재 없습니다. `environment/ubuntu-packages.txt`를 기준으로 공통 Base와 미션 전용 package를 분리합니다.
 
 ## 6. Phase M3 — Linux 사용자 5개 생성
 
@@ -197,6 +209,12 @@ codyssey04
 codyssey05
 ```
 
+Repository root에서:
+
+```bash
+sudo bash training/round-01-clear/environment/mac-v/setup-users.sh
+```
+
 정책:
 
 - 각 사용자 HOME 생성
@@ -206,9 +224,7 @@ codyssey05
 - 각 사용자에 `~/b2-2-team` 작업 디렉터리 준비
 - 비밀번호/Secret을 Repository에 저장하지 않음
 
-OrbStack은 표준 `adduser`/`useradd`로 추가 Linux 사용자를 만들 수 있으며 `orb -m codyssey -u <user>` 형식으로 직접 접속할 수 있습니다.
-
-사용자 접속 예:
+OrbStack은 표준 Linux 사용자 관리 도구를 사용할 수 있으며, 추가 사용자는 다음 형태로 직접 접속합니다.
 
 ```bash
 orb -m codyssey -u codyssey01
@@ -233,12 +249,11 @@ gh auth login --hostname github.com --git-protocol https --web
 gh auth setup-git --hostname github.com
 ```
 
-GitHub CLI는 `gh auth login`의 web flow를 지원하며, `gh auth setup-git`은 Git이 `gh`를 credential helper로 사용하도록 구성합니다.
-
 주의:
 
-- Linux 환경에서 안전한 credential store를 찾지 못하면 GitHub CLI가 자격 증명을 파일에 저장할 수 있으므로 공용 PC에서는 **종료 시 로그아웃이 필수**입니다.
 - Token 값을 직접 출력하지 않습니다.
+- 공용 PC에서는 학습 종료 시 각 사용자 `gh` 세션을 정리합니다.
+- 브라우저 세션과 Linux 사용자별 `gh` 인증을 같은 것으로 보지 않습니다.
 
 ## 8. Phase M5 — Account Identity Gate
 
@@ -251,11 +266,17 @@ git config --get user.name
 git config --get user.email
 ```
 
-Git identity가 아직 없으면 해당 사용자에서만 설정합니다.
+Git identity가 아직 없으면 **현재 Linux 사용자에만** 설정합니다.
 
 ```bash
 git config --global user.name "<학습 계정 표시 이름>"
-git config --global user.email "<해당 GitHub 계정 이메일>"
+git config --global user.email "<해당 GitHub 계정 이메일 또는 GitHub noreply 이메일>"
+```
+
+Repository의 검증 도구를 사용할 수 있습니다.
+
+```bash
+bash training/round-01-clear/environment/mac-v/verify-identity.sh <expected-github-login>
 ```
 
 PASS 조건:
@@ -264,16 +285,6 @@ PASS 조건:
 Linux User
 ↔ GitHub Login
 ↔ Git Commit Identity
-```
-
-세 항목의 매핑이 맞아야 합니다.
-
-예:
-
-```text
-codyssey03
-↔ GitHub Account C
-↔ Account C의 Git name/email
 ```
 
 불일치하면 **STOP**하고 Issue/Commit/PR/Review를 만들지 않습니다.
@@ -317,7 +328,7 @@ Issue
 sudo bash training/round-01-clear/environment/mac-v/verify.sh
 ```
 
-계정별 추가 검증:
+계정별 검증:
 
 ```bash
 whoami
@@ -325,6 +336,12 @@ gh auth status --active --hostname github.com
 gh api user --jq '.login'
 git config --get user.name
 git config --get user.email
+```
+
+또는:
+
+```bash
+bash training/round-01-clear/environment/mac-v/verify-identity.sh <expected-github-login>
 ```
 
 Token을 화면이나 Evidence에 노출하지 않습니다.
@@ -353,9 +370,10 @@ Token을 화면이나 Evidence에 노출하지 않습니다.
 - [x] Ubuntu 24.04 기준 정의
 - [x] Linux User 5개 정책 정의
 - [x] `gh` 인증 정책 정의
-- [x] 설치 스크립트 준비
+- [x] Control Tower Bootstrap 연계
 - [x] 사용자 생성 스크립트 준비
-- [x] 검증 스크립트 준비
+- [x] 시스템 검증 스크립트 준비
+- [x] 계정 Identity Gate 검증 스크립트 준비
 - [x] 공용 PC Closeout 정책 준비
 
 ### Runtime PASS — 실제 실행 후에만
@@ -363,8 +381,7 @@ Token을 화면이나 Evidence에 노출하지 않습니다.
 - [ ] OrbStack 실행 확인
 - [ ] `codyssey` machine 존재
 - [ ] Ubuntu 24.04 확인
-- [ ] Git 설치/버전 확인
-- [ ] GitHub CLI 설치/버전 확인
+- [ ] Control Tower Ubuntu Bootstrap PASS
 - [ ] `codyssey01`~`codyssey05` 실제 존재
 - [ ] 각 HOME 소유권/권한 PASS
 - [ ] GitHub A~E 각각 올바른 Linux User에 인증
