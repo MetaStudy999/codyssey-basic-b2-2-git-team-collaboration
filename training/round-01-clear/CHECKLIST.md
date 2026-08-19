@@ -184,7 +184,12 @@
 - [x] `environment/mac-v/verify.sh` 준비
 - [x] `environment/mac-v/verify-identity.sh` 단일 계정 Gate
 - [x] `environment/mac-v/verify-all-identities.sh` 5계정 Gate
+- [x] `simulation/mac-v/repository-template/` Simulation seed 구조
+- [x] `environment/mac-v/create-simulation-repo.sh` Account A용 safe seed creator
+- [x] `simulation/mac-v/SIMULATION-REPOSITORY-SETUP.md` collaborator/protection Gate 가이드
+- [x] `environment/mac-v/verify-simulation-repo.sh` read-only Repository Gate
 - [x] `environment/mac-v/prepare-simulation-clones.sh` 독립 clone 5개 helper
+- [x] `environment/mac-v/collect-runtime-report.sh` Secret 비노출 상태 보고 helper
 - [x] `environment/mac-v/MAC-V-EXECUTION-RECORD-TEMPLATE.md` 실제 실행 기록 템플릿
 - [x] `environment/mac-v/CLOSEOUT.md` 공용 PC 보안 마무리 절차
 - [x] `simulation/mac-v/README.md` 협업 Simulation Runbook
@@ -205,7 +210,10 @@
 - [ ] GitHub Account A~E gh 인증 5/5
 - [ ] Git identity 5/5
 - [ ] Account Identity Gate 5/5
-- [ ] Simulation Repository 확정
+- [ ] Simulation Repository seed 실제 생성
+- [ ] Account B~E collaborator 초대 수락
+- [ ] main 보호 정책 실제 확인
+- [ ] `verify-simulation-repo.sh` 0 FAIL
 - [ ] 각 사용자별 독립 Repository clone 5/5
 - [ ] Issue 10+
 - [ ] merged PR 10+ / 계정별 2+
@@ -215,6 +223,7 @@
 - [ ] Conflict 2+ / non-trivial 1+
 - [ ] Troubleshooting 4종 / Account A~E 전원 참여
 - [ ] Simulation `SUBMISSION.md` 완성
+- [ ] `collect-runtime-report.sh` 결과 검토
 - [ ] `MAC-V-EXECUTION-RECORD` 실제 값으로 작성
 - [ ] MAC-V Simulation 협업 Runtime 수행
 - [ ] 공용 PC Closeout PASS
