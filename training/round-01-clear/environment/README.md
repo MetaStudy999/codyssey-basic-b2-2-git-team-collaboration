@@ -12,42 +12,102 @@ B2-2의 실제 협업 Runtime과 5계정 학습 Simulation을 분리하여 운�
 
 학습 Simulation
 → 동일 GitHub 계정 5개를 MAC-V와 WIN-V에서 각각 사용
+→ 양쪽 모두 Ubuntu 24.04 사용자 공간을 공통 기준으로 사용
 → Linux User 5개 방식(CORE)
 → Cross-platform
-→ VM/Instance 5개 방식(ADVANCED)
+→ 독립 VM/Instance 5개 방식(ADVANCED)
 ```
+
+### CORE 실행 환경
+
+```text
+MAC-V
+학교 공용 Mac
+→ macOS 호스트 사용자 1개
+→ OrbStack
+→ Ubuntu 24.04 machine `codyssey`
+→ codyssey01~05 Linux User
+
+WIN-V
+Windows 11 Pro
+→ WSL2
+→ Ubuntu 24.04
+→ codyssey01~05 Linux User
+```
+
+GitHub 계정은 **총 5개**이며 MAC-V와 WIN-V에서 동일한 계정 A~E를 사용합니다.
 
 상세 설계:
 
-- [`MULTI-ACCOUNT-SIMULATION.md`](MULTI-ACCOUNT-SIMULATION.md) — GitHub 계정 5개를 MAC-V/WIN-V에서 각각 운영하는 학습 시뮬레이션과 VM/Instance 5개 확장안
+- [`MULTI-ACCOUNT-SIMULATION.md`](MULTI-ACCOUNT-SIMULATION.md) — 5계정 듀얼 런타임 구조, Ubuntu 24.04 공통 기준, `gh` 인증, Cross-platform, 독립 VM/Instance 5개 확장안
 
 ## 📑 목차
 
 - [빠른 시작](#빠른-시작quick-start)
 - [Golden Path](#golden-path)
 - [Runtime 전 확인](#runtime-전-확인)
+- [공통 Ubuntu 24.04 기준](#공통-ubuntu-2404-기준)
 - [5계정 Simulation 정책](#5계정-simulation-정책)
 - [안전 원칙](#안전-원칙)
 - [Reference vs Runtime](#reference-vs-runtime)
 
 ## Golden Path
 
+- Ubuntu 24.04
 - Git
-- GitHub account
+- GitHub account 5개
 - GitHub CLI (`gh`)는 **5계정 Simulation의 기본 인증 도구**로 사용
 - Python 3.10+는 간단 결과물 선택 시 사용할 수 있음
 - 공식 B2-2는 실제 3~5인 팀
 
 ## Runtime 전 확인
 
+각 환경에서 먼저 Ubuntu 기준점을 확인합니다.
+
 ```bash
+cat /etc/os-release
+uname -m
+whoami
+pwd
 git --version
 gh --version 2>/dev/null || true
+```
+
+계정별 작업 직전에는 추가로 확인합니다.
+
+```bash
+gh api user --jq '.login'
 git config --get user.name
 git config --get user.email
 ```
 
 GitHub 인증 정보와 Token 값 자체를 채팅/Evidence에 출력하지 않습니다.
+
+## 공통 Ubuntu 24.04 기준
+
+MAC-V와 WIN-V의 가상화 계층은 다릅니다.
+
+```text
+MAC-V: macOS → OrbStack → Ubuntu 24.04
+WIN-V: Windows 11 Pro → WSL2 → Ubuntu 24.04
+```
+
+따라서 커널 구현 자체가 동일한 환경이라는 의미는 아닙니다. B2-2에서는 **Ubuntu 24.04 사용자 공간, 사용자 이름, HOME 경로, 도구, Git/GitHub 작업 절차를 동일한 기준으로 맞추는 것**을 목표로 합니다.
+
+공통 기준:
+
+```text
+Ubuntu 24.04
+codyssey01~05
+/home/codyssey01~05
+gh + HTTPS
+GitHub Account A~E 동일 매핑
+~/b2-2-team
+GitHub Flow
+Repository .gitattributes 우선
+```
+
+`uname`의 커널 문자열이 두 환경에서 다른 것은 정상이며 B2-2 FAIL 사유가 아닙니다.
 
 ## 5계정 Simulation 정책
 
@@ -57,15 +117,15 @@ GitHub 학습 계정은 총 5개만 사용하고, **동일한 5개 계정**을 M
 
 ```text
 CORE
-MAC-V: Ubuntu Runtime 1개 + codyssey01~05 Linux User
-WIN-V: Ubuntu Runtime 1개 + codyssey01~05 Linux User
+MAC-V: OrbStack Ubuntu 24.04 `codyssey` + codyssey01~05
+WIN-V: WSL2 Ubuntu 24.04 + codyssey01~05
         ↓
 CROSS-PLATFORM
 MAC-V ↔ WIN-V 협업
         ↓
 ADVANCED
-MAC-V: codyssey01~05 VM/Instance 5개
-WIN-V: codyssey01~05 VM/Instance 5개
+MAC-V: OrbStack Ubuntu 24.04 machine 5개
+WIN-V: WSL2 독립 instance 5개 또는 Ubuntu 24.04 VM 5개
 ```
 
 Linux User와 GitHub 계정은 1:1로 고정합니다.
@@ -82,12 +142,15 @@ codyssey05 → Account E
 
 ## 안전 원칙
 
+- 학교 공용 Mac 호스트에는 B2-2용 macOS 사용자 5개를 만들지 않음
+- MAC-V 학습 상태는 OrbStack `codyssey` Ubuntu 내부 Linux User로 분리
+- WIN-V 학습 상태는 WSL2 Ubuntu 24.04 내부 Linux User로 분리
 - main/shared branch force push 금지
 - `reset --soft` 실습은 push 전 로컬 commit에 수행
 - push된 commit 취소는 `revert` 실습
 - `rebase -i` 보너스는 개인 feature branch에서만
 - 실제 충돌 실습 전 작업 파일을 commit/push하여 복구 지점을 확보
-- `OS User ↔ GitHub Account ↔ Git Commit Identity`가 맞지 않으면 STOP
+- `Linux User ↔ GitHub Account ↔ Git Commit Identity`가 맞지 않으면 STOP
 - Simulation 기록을 실제 팀 Evidence로 대체하지 않음
 
 ## Reference vs Runtime
