@@ -12,8 +12,11 @@
 → codyssey01~05
 → GitHub A~E
 → Identity Gate 5/5
-→ Simulation Repository clone 5/5
+→ Simulation Repository seed
+→ Repository Gate
+→ clone 5/5
 → Issue/PR/Review Simulation
+→ Sanitized Runtime Report
 ```
 
 실제 명령 출력과 GitHub 기록이 없으면 PASS로 기록하지 않습니다.
@@ -230,17 +233,66 @@ codyssey05 ↔ GitHub E ↔ Git Identity E
 
 하나라도 불일치하면 Issue/Commit/PR/Review Simulation을 시작하지 않습니다.
 
-## 5. Simulation Repository 확정 / clone 5개
+## 5. Simulation Repository seed / Repository Gate / clone 5개
 
 Simulation은 **별도 학습용 Repository**를 사용합니다.
 
 ```text
-Reference Repository 재사용 금지(기본)
-실제 팀 Repository 재사용 금지(기본)
+Reference Repository 재사용 금지
+실제 팀 Repository 재사용 금지
 Simulation 전용 Repository 사용
 ```
 
-Repository가 확정되고 Account A~E 모두 접근 가능해진 뒤 Ubuntu 관리자 세션에서:
+상세 절차:
+
+- [`../../simulation/mac-v/SIMULATION-REPOSITORY-SETUP.md`](../../simulation/mac-v/SIMULATION-REPOSITORY-SETUP.md)
+
+### 5-1. Account A에서 seed Repository 생성
+
+`codyssey01` / Account A에서:
+
+```bash
+cd "$HOME/codyssey/codyssey-basic-b2-2-git-team-collaboration"
+
+bash training/round-01-clear/environment/mac-v/create-simulation-repo.sh
+```
+
+기본 이름:
+
+```text
+codyssey-b2-2-sim-mac-v
+```
+
+이 helper는 기존 remote Repository나 `~/b2-2-team/simulation-admin`을 자동 삭제/덮어쓰지 않습니다.
+
+### 5-2. Account B~E access와 main 보호
+
+Account A의 Repository 설정에서 B~E를 collaborator로 추가하고, 각 계정에서 초대를 수락합니다.
+
+그 다음 `main`에 다음 학습 정책을 적용합니다.
+
+```text
+Pull Request required
+Approval 1+
+Force push 금지
+Branch deletion 보호
+```
+
+### 5-3. Repository Gate
+
+Account A가 읽을 수 있는 세션에서:
+
+```bash
+bash training/round-01-clear/environment/mac-v/verify-simulation-repo.sh \
+  <OWNER>/<SIMULATION-REPO> \
+  <github-A> <github-B> <github-C> <github-D> <github-E>
+```
+
+0 FAIL 전에는 clone/Issue Cycle을 시작하지 않습니다.
+
+### 5-4. 5개 독립 clone
+
+Repository Gate PASS 후 Ubuntu 관리자 세션에서:
 
 ```bash
 cd "$HOME/codyssey/codyssey-basic-b2-2-git-team-collaboration"
@@ -281,7 +333,7 @@ Troubleshooting       4종
 Participation         5/5
 ```
 
-## 7. Evidence
+## 7. Evidence / 실행 보고
 
 Simulation Evidence 위치:
 
@@ -303,6 +355,14 @@ TRAINING SIMULATION — NOT OFFICIAL B2-2 EVIDENCE
 
 - [`MAC-V-EXECUTION-RECORD-TEMPLATE.md`](MAC-V-EXECUTION-RECORD-TEMPLATE.md)
 
+macOS Host에서 Secret 값을 노출하지 않는 상태 보고를 한 번에 만들려면:
+
+```bash
+bash training/round-01-clear/environment/mac-v/collect-runtime-report.sh
+```
+
+이 보고서는 Host/OrbStack/Ubuntu, `git`/`gh`, Linux User 5개, 각 계정의 GitHub 로그인 가능 여부와 Git identity 설정 여부, Simulation clone 존재 여부를 확인합니다. Token/Password/Private Key 값을 출력하도록 설계하지 않았습니다.
+
 ## 8. 공용 PC Closeout
 
 학습 종료 시:
@@ -318,15 +378,19 @@ TRAINING SIMULATION — NOT OFFICIAL B2-2 EVIDENCE
 현재 Repository 반영 상태:
 
 ```text
-One-command Host/CORE runner ✅ READY
-Host/CORE Runbook            ✅ READY
-Identity 5/5 verifier        ✅ READY
-Simulation clone helper      ✅ READY
-Task / Review Matrix         ✅ READY
-Conflict/Troubleshooting Lab ✅ READY
-Execution Record Template    ✅ READY
-MAC-V 실제 Runtime           ⬜ NOT RUN
-Identity Gate 실제 PASS      ⬜ NOT RUN
-Simulation 실제 수행         ⬜ NOT RUN
-Actual Mission CLEAR         ❌ 아님
+One-command Host/CORE runner   ✅ READY
+Host/CORE Runbook              ✅ READY
+Identity 5/5 verifier          ✅ READY
+Simulation repository template ✅ READY
+Simulation repository creator  ✅ READY
+Simulation repository verifier ✅ READY
+Simulation clone helper        ✅ READY
+Task / Review Matrix           ✅ READY
+Conflict/Troubleshooting Lab   ✅ READY
+Sanitized Runtime Report       ✅ READY
+Execution Record Template      ✅ READY
+MAC-V 실제 Runtime             ⬜ NOT RUN
+Identity Gate 실제 PASS        ⬜ NOT RUN
+Simulation 실제 수행           ⬜ NOT RUN
+Actual Mission CLEAR           ❌ 아님
 ```
