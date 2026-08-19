@@ -1,16 +1,19 @@
 # B2-2 Round 01 — Mission Clear Checklist
 
-> B2-2의 핵심은 실제 3~5인 팀 GitHub 협업 기록입니다. **Phase A CORE READY는 실제 협업 PASS/CLEAR가 아닙니다.**
+> B2-2의 핵심은 실제 3~5인 팀 GitHub 협업 기록입니다. **Phase A CORE READY나 5계정 Simulation PASS는 실제 협업 PASS/CLEAR가 아닙니다.**
 
 ## 현재 상태
 
 - Training Round: **R01 — CLEAR**
+- 전역 운영 단계: **Phase C — FAST EXECUTE / Runtime**
 - Mission: **B2-2**
-- Runtime Mission 상태: **⬜ NOT STARTED**
+- B2-2 Workcell 상태: **🟡 ACTIVE**
 - Phase A Reference 상태: **CORE READY**
+- 실제 팀 Runtime/Evidence: **🟡 PENDING / 최종 검증 전**
 - 5계정 Simulation 문서 상태: **✅ DOCUMENTATION READY**
 - MAC-V Simulation Runtime: **⬜ NOT RUN**
 - WIN-V Simulation Runtime: **⬜ NOT RUN**
+- Mission CLEAR: **아님**
 
 ## A. Source / Reference
 
@@ -31,6 +34,8 @@
 - [x] `REFERENCE-STATUS.md`
 - [x] actual Runtime links 대신 `TODO_RUNTIME` 유지
 - [x] Phase A 자체감사 BLOCKER/MAJOR 0
+- [x] `BEGINNER-GUIDE.md` 3계층 모듈화
+- [x] `docs/BEGINNER-GUIDE-MODULARIZATION-AUDIT.md`
 
 ## B. 협업 정책 Reference
 
@@ -179,7 +184,7 @@
 - [ ] `orb status` PASS
 - [ ] OrbStack `codyssey` 존재/생성
 - [ ] `codyssey` = Ubuntu 24.04
-- [ ] Git/gh 공통 도구 PASS
+- [ ] Control Tower Ubuntu Bootstrap PASS
 - [ ] `codyssey01`~`codyssey05` 5/5 존재
 - [ ] 사용자 HOME/Workspace 검증 0 FAIL
 - [ ] GitHub Account A~E gh 인증 5/5
@@ -192,6 +197,7 @@
 ### WIN-V Runtime
 
 - [ ] WSL2 Ubuntu 24.04 기준 확인
+- [ ] Control Tower Ubuntu Bootstrap PASS
 - [ ] `codyssey01`~`codyssey05` 구성
 - [ ] 동일 GitHub Account A~E 인증/Identity Gate
 - [ ] WIN-V Simulation 협업 Runtime 수행
