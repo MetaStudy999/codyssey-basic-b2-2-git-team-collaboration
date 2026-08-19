@@ -2,7 +2,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "$SCRIPT_DIR/../../../../.." && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/../../../.." && pwd)"
 
 log() { printf '[MAC-V prepare-core] %s\n' "$*"; }
 fail() { printf '[MAC-V prepare-core][FAIL] %s\n' "$*" >&2; exit 1; }
@@ -12,6 +12,8 @@ fail() { printf '[MAC-V prepare-core][FAIL] %s\n' "$*" >&2; exit 1; }
 source /etc/os-release
 [[ "${ID:-}" == "ubuntu" && "${VERSION_ID:-}" == "24.04" ]] \
   || fail "Ubuntu 24.04 내부에서 실행해야 합니다. 현재: ${ID:-unknown} ${VERSION_ID:-unknown}"
+
+[[ -d "$REPO_ROOT/.git" ]] || fail "B2-2 Repository root를 찾지 못했습니다: $REPO_ROOT"
 
 log "Repository root: $REPO_ROOT"
 log "Ubuntu 24.04 확인 PASS"
