@@ -37,19 +37,56 @@ Windows 11 Pro
 
 GitHub 계정은 **총 5개**이며 MAC-V와 WIN-V에서 동일한 계정 A~E를 사용합니다.
 
-상세 설계:
+### 현재 준비 상태
 
-- [`MULTI-ACCOUNT-SIMULATION.md`](MULTI-ACCOUNT-SIMULATION.md) — 5계정 듀얼 런타임 구조, Ubuntu 24.04 공통 기준, `gh` 인증, Cross-platform, 독립 VM/Instance 5개 확장안
+```text
+MAC-V Documentation / Automation  ✅ READY
+MAC-V Runtime                      ⬜ NOT RUN
+WIN-V Documentation baseline       ✅ DEFINED
+WIN-V Runtime                      ⬜ NOT RUN
+B2-2 실제 Mission                  🟡 ACTIVE
+```
+
+MAC-V 문서와 스크립트가 준비되었다는 뜻이지 실제 OrbStack/Ubuntu/계정/`gh` 실행이 통과했다는 뜻은 아닙니다.
 
 ## 📑 목차
 
 - [빠른 시작](#빠른-시작quick-start)
+- [환경별 실행 문서](#환경별-실행-문서)
 - [Golden Path](#golden-path)
 - [Runtime 전 확인](#runtime-전-확인)
 - [공통 Ubuntu 24.04 기준](#공통-ubuntu-2404-기준)
 - [5계정 Simulation 정책](#5계정-simulation-정책)
 - [안전 원칙](#안전-원칙)
 - [Reference vs Runtime](#reference-vs-runtime)
+
+## 환경별 실행 문서
+
+### 공통 설계
+
+- [`MULTI-ACCOUNT-SIMULATION.md`](MULTI-ACCOUNT-SIMULATION.md) — 5계정 듀얼 런타임 구조, Ubuntu 24.04 공통 기준, `gh` 인증, Cross-platform, 독립 VM/Instance 5개 확장안
+
+### MAC-V — 우선 진행
+
+- [`mac-v/README.md`](mac-v/README.md) — 학교 공용 Mac → OrbStack → Ubuntu 24.04 `codyssey` → Linux User 5개 전체 단계
+- [`mac-v/setup-base.sh`](mac-v/setup-base.sh) — Ubuntu 24.04 확인 후 Git/GitHub CLI 공통 도구 CHECK BEFORE INSTALL
+- [`mac-v/setup-users.sh`](mac-v/setup-users.sh) — `codyssey01`~`codyssey05` idempotent 생성/권한 준비
+- [`mac-v/verify.sh`](mac-v/verify.sh) — Ubuntu/도구/사용자/HOME/Workspace 구조 검증
+- [`mac-v/CLOSEOUT.md`](mac-v/CLOSEOUT.md) — 공용 PC용 gh 로그아웃/브라우저/Secret/OrbStack 종료 절차
+
+MAC-V 실행 순서:
+
+```text
+M0 OrbStack 사전 점검
+→ M1 Ubuntu 24.04 codyssey 생성/확인
+→ M2 공통 도구 준비
+→ M3 Linux User 5개 생성
+→ M4 gh 계정 A~E 인증
+→ M5 Account Identity Gate
+→ M6 Repository clone / 협업
+→ M7 Runtime Verification
+→ M8 Public-PC Closeout
+```
 
 ## Golden Path
 
@@ -138,20 +175,16 @@ codyssey04 → Account D
 codyssey05 → Account E
 ```
 
-상세 절차와 비교 기준은 `MULTI-ACCOUNT-SIMULATION.md`를 단일 기준으로 사용합니다.
-
 ## 안전 원칙
 
-- 학교 공용 Mac 호스트에는 B2-2용 macOS 사용자 5개를 만들지 않음
-- MAC-V 학습 상태는 OrbStack `codyssey` Ubuntu 내부 Linux User로 분리
-- WIN-V 학습 상태는 WSL2 Ubuntu 24.04 내부 Linux User로 분리
 - main/shared branch force push 금지
 - `reset --soft` 실습은 push 전 로컬 commit에 수행
 - push된 commit 취소는 `revert` 실습
 - `rebase -i` 보너스는 개인 feature branch에서만
 - 실제 충돌 실습 전 작업 파일을 commit/push하여 복구 지점을 확보
-- `Linux User ↔ GitHub Account ↔ Git Commit Identity`가 맞지 않으면 STOP
+- `OS User ↔ GitHub Account ↔ Git Commit Identity`가 맞지 않으면 STOP
 - Simulation 기록을 실제 팀 Evidence로 대체하지 않음
+- 학교 공용 MAC-V에서는 작업 종료 시 `gh`/브라우저 세션을 정리하고 Token을 남기지 않음
 
 ## Reference vs Runtime
 
