@@ -18,7 +18,54 @@
 
 실제 명령 출력과 GitHub 기록이 없으면 PASS로 기록하지 않습니다.
 
+## 0. 권장 빠른 경로(Fast Path)
+
+B2-2 Repository가 **macOS Host에도 clone되어 있다면**, Host/Guest CORE 준비는 다음 한 명령으로 묶어서 수행할 수 있습니다.
+
+```bash
+bash training/round-01-clear/environment/mac-v/mac-v-orchestrate.sh --prepare
+```
+
+이 스크립트가 실제로 묶어서 수행하는 범위:
+
+```text
+OrbStack 확인
+→ codyssey 재사용 또는 없을 때만 Ubuntu 24.04 생성
+→ Ubuntu 24.04 검증
+→ Git bootstrap seed
+→ Control Tower clone/update
+→ B2-2 Repository clone/update
+→ Control Tower Ubuntu Bootstrap
+→ codyssey01~05 생성
+→ HOME / Workspace 검증
+```
+
+안전 제한:
+
+```text
+기존 codyssey 자동 삭제 안 함
+Ubuntu 24.04 불일치 시 STOP
+기존 Repository local change 발견 시 STOP
+pull은 --ff-only
+Token/Password/2FA 자동화 안 함
+gh auth login 자동화 안 함
+Git identity 자동 결정 안 함
+Issue/PR/Review 자동 생성 안 함
+```
+
+조회만 먼저 하고 싶다면:
+
+```bash
+bash training/round-01-clear/environment/mac-v/mac-v-orchestrate.sh --check
+```
+
+Fast Path가 PASS하면 아래 **1~2절의 Host/CORE 수동 절차는 완료된 것으로 보고 3절 GitHub 인증으로 이동**합니다. 실제 출력이 없으면 PASS로 기록하지 않습니다.
+
+---
+
 ## 1. macOS Host — OrbStack / codyssey 준비
+
+Fast Path를 사용하지 않을 경우 아래 수동 절차를 사용합니다.
 
 `host-preflight.sh`를 macOS에서 실행할 수 있는 위치에 B2-2 Repository가 있다면:
 
@@ -62,7 +109,7 @@ Ubuntu 24.04가 아니면 자동 삭제/재생성하지 않습니다.
 
 ## 2. Ubuntu Guest — Repository / CORE 준비
 
-Ubuntu `codyssey` 안에서 수행합니다.
+Fast Path를 사용하지 않을 경우 Ubuntu `codyssey` 안에서 수행합니다.
 
 ### 2-1. Git bootstrap seed
 
@@ -252,6 +299,10 @@ Simulation Repository의 `SUBMISSION.md` 상단에도 다음을 표시합니다.
 TRAINING SIMULATION — NOT OFFICIAL B2-2 EVIDENCE
 ```
 
+실제 수행 기록 정리 양식:
+
+- [`MAC-V-EXECUTION-RECORD-TEMPLATE.md`](MAC-V-EXECUTION-RECORD-TEMPLATE.md)
+
 ## 8. 공용 PC Closeout
 
 학습 종료 시:
@@ -267,11 +318,13 @@ TRAINING SIMULATION — NOT OFFICIAL B2-2 EVIDENCE
 현재 Repository 반영 상태:
 
 ```text
+One-command Host/CORE runner ✅ READY
 Host/CORE Runbook            ✅ READY
 Identity 5/5 verifier        ✅ READY
 Simulation clone helper      ✅ READY
 Task / Review Matrix         ✅ READY
 Conflict/Troubleshooting Lab ✅ READY
+Execution Record Template    ✅ READY
 MAC-V 실제 Runtime           ⬜ NOT RUN
 Identity Gate 실제 PASS      ⬜ NOT RUN
 Simulation 실제 수행         ⬜ NOT RUN
